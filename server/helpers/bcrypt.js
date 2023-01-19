@@ -4,7 +4,7 @@ const hashPassword = (pass) => {
   return bcrypt.hashSync(pass, 10)
 }
 
-const comparePassword = (hash, pass) => {
+const comparePassword = (pass, hash) => {
   return bcrypt.compareSync(pass, hash)
 }
 

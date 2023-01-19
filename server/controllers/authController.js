@@ -8,28 +8,33 @@ class UserController {
       const payload = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
-      }
+        password: req.body.password,
+      };
 
-      const response = await User.create(payload)
+      const response = await User.create(payload);
 
-      res.status(201).json(response)
+      res.status(201).json(response);
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
   static async login(req, res, next) {
     try {
-      const foundUser = User.findOne({
-        where: { username: req.body.username },
+      const { username, password } = req.body;
+      const foundUser = await User.findOne({
+        where: { username },
       });
 
-      if (!comparePassword(foundUser.password, req.body.password)) {
+      if (!foundUser) {
+        throw { name: "NotFound" };
+      }
+
+      if (!comparePassword(password, foundUser.password)) {
         throw { name: "InvalidInput" };
       }
 
-      const payload = { username: req.body.username, email: req.body.email };
+      const payload = { id: foundUser.id, username: foundUser.username };
 
       const access_token = signToken(payload);
 
