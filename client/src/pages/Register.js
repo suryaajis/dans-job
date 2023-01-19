@@ -8,8 +8,21 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.users);
+
+  React.useEffect(() => {
+    let token = localStorage.getItem("access_token");
+
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -86,7 +99,9 @@ export default function Register() {
                 <></>
               </Grid>
               <Grid item>
-                <Link to="/login" replace >{"Already have account? Sign In"}</Link>
+                <Link to="/login" replace>
+                  {"Already have account? Sign In"}
+                </Link>
               </Grid>
             </Grid>
           </Box>

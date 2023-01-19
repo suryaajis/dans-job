@@ -1,16 +1,18 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store, saga } from "./app/store";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import userSaga from "./app/sagas/userSaga";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+saga.run(userSaga)
 
 const theme = createTheme()
 

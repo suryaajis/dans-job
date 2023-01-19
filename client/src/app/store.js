@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './reducers/counterSlice';
+import createSagaMiddleware from "redux-saga"
+import userReducer from './reducers/userSlice';
+import jobReducer from "./reducers/jobSlice"
+
+export const saga = createSagaMiddleware()
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    users: userReducer,
+    jobs: jobReducer
   },
+  middleware: [saga]
 });

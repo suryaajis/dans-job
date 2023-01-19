@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,16 +9,32 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { loginUser } from "../app/reducers/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { token } = useSelector((state) => state.users)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const payload = {
+      username: data.get("username"),
       password: data.get("password"),
-    });
+    };
+    
+    dispatch(loginUser(payload));
   };
+
+  React.useEffect(() => {
+    let token = localStorage.getItem("access_token")
+    
+    if(token) {
+      navigate("/")
+    }
+  }, [token, navigate])
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
