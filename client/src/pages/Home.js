@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 // import { Footer } from "../components/Footer";
 import { ListItemJob } from "../components/ListItem";
 import { Navbar } from "../components/Navbar";
-import { SerachBar } from "../components/SerachBar";
+import { SearchBar } from "../components/SearchBar";
 
 const Home = () => {
   useEffect(() => {}, []);
@@ -12,7 +12,7 @@ const Home = () => {
     <React.Fragment>
       <Navbar />
       <Container maxWidth="xl" sx={{mt:6}}>
-        <SerachBar />
+        <SearchBar />
         <ListItemJob />
       </Container>
       {/* <Footer /> */}

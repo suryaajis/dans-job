@@ -8,11 +8,11 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import userSaga from "./app/sagas/userSaga";
+import rootSaga from "./app/sagas/rootSaga";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-saga.run(userSaga)
+saga.run(rootSaga)
 
 const theme = createTheme()
 
