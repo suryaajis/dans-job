@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // import { useDispatch } from "react-redux";
 // import { getListJobs } from "../app/reducers/jobSlice";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   // const dispatch = useDispatch()
 
   const [checked, setChecked] = useState(true);
@@ -15,16 +15,7 @@ export const SearchBar = () => {
     setChecked(event.target.checked);
   };
 
-  const handleSearch = (event) => {
-    event.preventDefault()
-    const payload = {
-      description: desc,
-      location: loc
-    };
-    
-    // dispatch(getListJobs(payload))
-    console.log(payload)
-  }
+  
 
   return (
     <Container maxWidth="xl">
@@ -44,7 +35,7 @@ export const SearchBar = () => {
           <Typography sx={{fontWeight:"bold"}}>Full Time Only</Typography>
         </Grid>
         <Grid item xs={2}>
-          <Button onClick={handleSearch} variant="contained" sx={{height:"100%", width:"100%"}}>Search</Button>
+          <Button onClick={(event) => props.handleSearch(event, {desc, loc, checked})} variant="contained" sx={{height:"100%", width:"100%"}}>Search</Button>
         </Grid>
       </Grid>
     </Container>

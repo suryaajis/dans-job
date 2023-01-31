@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getListJobs } from "../app/reducers/jobSlice";
 
 
-export const ListItemJob = () => {
+export const ListItemJob = (props) => {
   const dispatch = useDispatch()
   const { listJobs } = useSelector((state) => state.jobs)
 
-  useEffect(() => {
-    dispatch(getListJobs())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getListJobs())
+  // }, [dispatch])
 
   return (
     <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
@@ -27,7 +27,7 @@ export const ListItemJob = () => {
         <Typography sx={{ fontWeight: "bold", fontSize: "36px" }}>
           Job List
         </Typography>
-        {listJobs?.map(item => {
+        {props.list?.map(item => {
           return (
             <Grid key={item.id} spacing={2} container sx={{ padding: "10px", borderRadius: "5px" }}>
               <Grid item xs={2}>
