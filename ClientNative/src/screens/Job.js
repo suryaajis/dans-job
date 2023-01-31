@@ -17,7 +17,7 @@ import {
 } from 'react-native-responsive-screen';
 import {ListItem} from '../components/ListItem';
 
-function JobScreen() {
+function JobScreen({navigation}) {
   const [jobList, setJobList] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState('');
@@ -86,7 +86,7 @@ function JobScreen() {
     getData()
   }
 
-  const Item = ({title}) => <ListItem title={title} />;
+  const Item = ({item}) => <ListItem item={item} navigation={navigation} />;
 
   return (
     <View style={{padding: hp(2)}}>
@@ -180,9 +180,10 @@ function JobScreen() {
 
       <FlatList
         data={jobList}
-        renderItem={({item}) => <Item title={item.title} />}
+        renderItem={({item}) => <Item item={item} />}
         keyExtractor={item => item.id}
-        style={{marginTop: hp(2)}}
+        style={{marginTop: hp(2), marginBottom: hp(4)}}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
